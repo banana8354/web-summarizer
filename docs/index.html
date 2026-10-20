@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>网页总结工具</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">网页总结工具</span>
+      </a>
+      <span class="nav-tag">本地抽取式摘要 · 无需 API Key</span>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <h1>粘贴网址，一键提炼要点</h1>
+      <p class="hero-desc">抓取网页正文，用本地词频算法选出最关键的几句话，全程离线可用。</p>
+
+      <form class="input-row" id="summarize-form" autocomplete="off">
+        <label class="sr-only" for="url-input">网页地址</label>
+        <input
+          id="url-input"
+          name="url"
+          type="url"
+          placeholder="https://example.com/article"
+          required
+          spellcheck="false"
+        />
+        <button type="submit" id="submit-btn">
+          <span class="btn-label">开始总结</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <p class="status" id="status" hidden></p>
+      <div class="error" id="error" hidden role="alert"></div>
+    </section>
+
+    <section class="result" id="result" hidden>
+      <article class="card">
+        <header class="card-header">
+          <h2 id="result-title"></h2>
+          <a id="result-url" class="result-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+          <p class="meta" id="result-meta"></p>
+        </header>
+        <ol class="summary-list" id="summary-list"></ol>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 网页总结工具 · 仅供学习与本地使用 · 正文提取依赖目标站点可访问性</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
