@@ -332,7 +332,9 @@ async function handleSummarize(req, res, searchParams) {
 
 /* ---------- Server ---------- */
 
-const server = http.createServer((req, res) => {
+/* ---------- 请求处理（本地运行与 Vercel 共用） ---------- */
+
+function handler(req, res) {
   const host = req.headers.host || `localhost:${PORT}`;
   let parsed;
   try {
@@ -355,8 +357,13 @@ const server = http.createServer((req, res) => {
 
   res.writeHead(405, { 'Content-Type': 'text/plain; charset=utf-8' });
   res.end('Method Not Allowed');
-});
+}
 
-server.listen(PORT, () => {
-  console.log(`Web Summarizer running at http://localhost:${PORT}`);
-});
+/* 直接运行 node server.js 时启动本地服务；被 Vercel 引入时只导出 handler */
+if (require.main === module) {
+  http.createServer(handler).listen(PORT, () => {
+    console.log(`Web Summarizer running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = handler;
