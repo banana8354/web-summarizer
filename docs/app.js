@@ -75,7 +75,7 @@ form.addEventListener('submit', async (event) => {
   setLoading(true);
 
   try {
-    const res = await fetch(${API_BASE}/api/summarize?url= + encodeURIComponent(url));
+    const res = await fetch(`${API_BASE}/api/summarize?url=${encodeURIComponent(url)}`);
     const data = await res.json();
 
     if (!data.ok) {
